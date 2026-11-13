@@ -13,7 +13,7 @@ measures exactly what the app shows. Credits use the billed per-token rates defi
 
 Usage:
   export SNOWFLAKE_ACCOUNT=<org>-<account> SNOWFLAKE_USER=<user> SNOWFLAKE_PAT=<token> DEMO_WAREHOUSE=<warehouse>
-  python3 measure.py --pattern all --reps 3          # writes results/results_all.csv
+  python3 benchmark/measure.py --pattern all --reps 3   # writes benchmark/results_all.csv
 """
 import argparse
 import csv
@@ -25,7 +25,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(HERE, "app"))
+sys.path.insert(0, os.path.join(HERE, "..", "app"))
 import server  # noqa: E402  the demo app's orchestrator, auth and credit rates
 
 PATTERNS = ["before_sproc", "before_mcp_full", "now_mcp_apps", "appendix_toolset"]
@@ -125,8 +125,7 @@ def main():
             with ThreadPoolExecutor(4) as pool:
                 rows += list(pool.map(lambda job: measure(pattern, *job), jobs))
 
-    os.makedirs(os.path.join(HERE, "results"), exist_ok=True)
-    out = os.path.join(HERE, "results", f"results_{args.pattern}.csv")
+    out = os.path.join(HERE, f"results_{args.pattern}.csv")
     columns = ["pattern", "question", "rep", "credits", "seconds", "correct", "chart", "orchestrator_tokens",
                "specialist_tokens", "total_tokens", "full_price_tokens", "specialist_calls",
                "kb_to_orchestrator", "answer", "error"]

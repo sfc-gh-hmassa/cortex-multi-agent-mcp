@@ -209,7 +209,7 @@ with 18 runs per pattern:
 - Cost falls more than the token count does because cached tokens bill at a lower rate. The orchestrator's
   own tokens are the full-price kind. Most of what's left is each specialist doing its actual work.
 
-Raw data: [`results/results_all.csv`](results/results_all.csv), one row per run, including each answer.
+Raw data: [`benchmark/results.csv`](benchmark/results.csv), one row per run, including each answer.
 
 ## 5. Where every number comes from
 
@@ -225,8 +225,8 @@ Every metric here comes from something you can pull yourself. Nothing is estimat
 | **Latency** | Wall-clock time around the whole question, from routing to the final answer | `seconds` in `run()` |
 | **Specialist calls** | Number of MCP `tools/call` requests per question | `specialist_calls` in `run()` |
 | **Charts** | Whether `structuredContent._mcp_app.blocks` contains a `chart` block | `charts` in `run()` |
-| **Stored-procedure pattern usage** | The procedure logs each `DATA_AGENT_RUN` response's `metadata.usage` to `SPECIALIST_USAGE_LOG` | `sql/04_before_stored_procedures.sql`, read by `measure.py` |
-| **Accuracy** | The answer contains the true value from `questions.json` (computed with SQL directly on the tables) | `is_correct()` in `measure.py` |
+| **Stored-procedure pattern usage** | The procedure logs each `DATA_AGENT_RUN` response's `metadata.usage` to `SPECIALIST_USAGE_LOG` | `sql/04_before_stored_procedures.sql`, read by `benchmark/measure.py` |
+| **Accuracy** | The answer contains the true value from `benchmark/questions.json` (computed with SQL directly on the tables) | `is_correct()` in `benchmark/measure.py` |
 
 ### Try it on one call (2 minutes)
 
@@ -351,9 +351,6 @@ flowchart LR
 Everything is created in `MULTIAGENT_DEMO.DEMO`. Running `deploy.sh` again updates it in place, with the same
 URL.
 
-**Prefer your laptop?** Run `./run_local.sh` (the same env vars plus `DEMO_WAREHOUSE`) once the objects exist,
-then open http://localhost:8000.
-
 ## 8. Show it
 
 1. Click a sample question. **Before** (MCP full response) and **After** (filtered + MCP Apps) run the same
@@ -366,10 +363,7 @@ then open http://localhost:8000.
    with `TRUNCATE TABLE MULTIAGENT_DEMO.DEMO.DEMO_RUNS;`.
 
 To rerun the full benchmark, including the stored-procedure pattern:
-`python3 measure.py --pattern all --reps 3` writes `results/results_all.csv`.
-
-A 15-minute talk track is in [`DEMO_SCRIPT.md`](DEMO_SCRIPT.md), and slides are in
-[`docs/`](docs/Multi-Agent_on_Cortex_Agents.pptx).
+`python3 benchmark/measure.py --pattern all --reps 3`.
 
 ## 9. Use it as a framework
 
@@ -402,20 +396,13 @@ Nothing in the code is specific to the four example specialists:
 ## What's in the repo
 
 ```
-compare_call.py      one specialist call, before vs after, with every metric and its source
+README.md            this playbook
 deploy.sh            one-command setup in Snowflake (prints the app URL)
-run_local.sh         run the app on your laptop instead
-sql/01-07            data, semantic views, specialist agents, both patterns, MCP server, run log
+compare_call.py      one specialist call, before vs after, with every metric and its source
 metrics.sql          before/after cost and latency, including billed credits
-app/server.py        the orchestrator (before and after modes) and run logging
-app/index.html       the React app: side-by-side panels and the running comparison
-app/vendor/          React, Vega-Lite, marked and DOMPurify, served by the app
-app/spcs_*.sql       Snowpark Container Services objects (used by deploy.sh)
-measure.py           the full benchmark across all patterns
-questions.json       benchmark questions and their true answers
-results/             our benchmark results, one row per run
-docs/                slides and screenshot
-DEMO_SCRIPT.md       15-minute walkthrough
+sql/01-07            data, semantic views, specialist agents, both patterns, MCP server, run log
+app/                 the orchestrator (server.py), the React app (index.html) and its hosting
+benchmark/           the full benchmark: script, questions with true answers, our results
 ```
 
 ## Appendix: agent toolsets
