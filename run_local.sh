@@ -4,7 +4,7 @@
 #   export SNOWFLAKE_ACCOUNT=<org>-<account> SNOWFLAKE_PAT=<programmatic access token> DEMO_WAREHOUSE=<warehouse>
 #   ./run_local.sh                     # then open http://localhost:8000
 #
-# setup.sql must have been run first (./deploy.sh does that, or paste it into a worksheet).
+# The Snowflake objects must exist first: run ./deploy.sh once, or run sql/01-07 in a worksheet.
 set -euo pipefail
 : "${SNOWFLAKE_ACCOUNT:?set SNOWFLAKE_ACCOUNT}" "${SNOWFLAKE_PAT:?set SNOWFLAKE_PAT}" "${DEMO_WAREHOUSE:?set DEMO_WAREHOUSE}"
 HERE="$(cd "$(dirname "$0")" && pwd)"

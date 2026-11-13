@@ -108,7 +108,7 @@ function Panel({ kind, res, loading }) {
   const before = kind === "before";
   const flow = before
     ? ["React app", "Orchestrator", "MCP (full response)", "Specialists"]
-    : ["React app", "Orchestrator", "MCP (table only)", "Specialists"];
+    : ["React app", "Orchestrator", "MCP (tables + text)", "Specialists"];
   let content;
   if (loading) content = html`<div className="spin">Asking the specialists…</div>`;
   else if (!res) content = html`<div className="empty">Ask a question to compare.</div>`;
@@ -136,8 +136,8 @@ function Panel({ kind, res, loading }) {
   return html`<section className=${"panel " + kind}>
     <div className="head">
       <div className="tag">${before ? "BEFORE" : "AFTER"}</div>
-      <h2>${before ? "Specialists return their full response" : "Specialists return the table; charts via MCP Apps"}</h2>
-      <p>${before ? "Each specialist's semantic-view context and working notes land in the orchestrator's context window." : "The orchestrator reads a small table. The specialist's own chart goes straight to the app."}</p>
+      <h2>${before ? "Specialists return their full response" : "Specialists return just the answer; charts via MCP Apps"}</h2>
+      <p>${before ? "Each specialist's semantic-view context and working notes land in the orchestrator's context window." : "The orchestrator reads the result table and short answer. The specialist's own chart goes straight to the app."}</p>
     </div>
     <div className="flow">${flow.map((f, i) => html`<${React.Fragment} key=${f}>${i ? "→" : ""}<b>${f}</b></${React.Fragment}>`)}</div>
     <div className="body">${content}</div>

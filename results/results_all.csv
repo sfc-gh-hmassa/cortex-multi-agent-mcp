@@ -1,73 +1,477 @@
-pattern,question,rep,total_tokens,orchestrator_tokens,specialist_tokens,cache_read,specialist_calls,bytes_to_orchestrator,secs,chart,correct,error
-before_sproc,q1_spend,0,291130,101673,189457,235606,1,0,35.09687900543213,True,False,
-before_sproc,q2_quality,0,272989,81629,191360,227213,1,0,32.728604316711426,True,True,
-before_sproc,q3_inventory,0,270171,80647,189524,215371,1,0,29.567112922668457,True,True,
-before_sproc,q4_orders,0,271728,81013,190715,216295,1,0,31.75311303138733,True,False,
-before_sproc,q5_spend_x_quality,0,922370,122209,800161,734774,4,0,104.77480983734131,True,True,
-before_sproc,q6_inventory_x_orders,0,335552,43015,292537,278898,2,0,34.50377702713013,False,True,
-before_sproc,q1_spend,1,270783,81056,189727,245692,1,0,30.697262048721313,True,False,
-before_sproc,q2_quality,1,551088,169815,381273,470689,2,0,74.53361821174622,True,True,
-before_sproc,q3_inventory,1,271137,81377,189760,227166,1,0,33.0407919883728,True,True,
-before_sproc,q4_orders,1,314013,123310,190703,267998,1,0,42.47203588485718,True,False,
-before_sproc,q5_spend_x_quality,1,1071536,119087,952449,897547,5,0,109.51574897766113,True,True,
-before_sproc,q6_inventory_x_orders,1,334878,42898,291980,249430,2,0,35.508909702301025,False,True,
-before_sproc,q1_spend,2,272511,82978,189533,226411,1,0,38.61015605926514,True,False,
-before_sproc,q2_quality,2,272862,81552,191310,227156,1,0,31.517652988433838,True,True,
-before_sproc,q3_inventory,2,472245,92616,379629,415391,2,0,53.190298080444336,True,True,
-before_sproc,q4_orders,2,313564,122778,190786,237690,1,0,37.79584813117981,True,False,
-before_sproc,q5_spend_x_quality,2,886661,124848,761813,742114,4,0,110.85208082199097,True,True,
-before_sproc,q6_inventory_x_orders,2,334847,42878,291969,279636,2,0,34.844085931777954,False,True,
-before_mcp_full,q1_spend,0,219818,30032,189786,119794,1,105975,20.95234203338623,False,True,
-before_mcp_full,q2_quality,0,222200,30848,191352,178294,1,108073,20.718846082687378,False,True,
-before_mcp_full,q3_inventory,0,219445,29786,189659,177137,1,105416,25.255486965179443,False,True,
-before_mcp_full,q4_orders,0,220597,30123,190474,168601,1,106475,19.686004877090454,False,True,
-before_mcp_full,q5_spend_x_quality,0,444271,61203,383068,318461,2,216275,56.849220752716064,False,True,
-before_mcp_full,q6_inventory_x_orders,0,439124,59386,379738,354872,2,211367,36.622283935546875,False,True,
-before_mcp_full,q1_spend,1,219676,29997,189679,176999,1,105771,23.172640800476074,False,True,
-before_mcp_full,q2_quality,1,222716,30991,191725,160455,1,108506,22.39206886291504,False,True,
-before_mcp_full,q3_inventory,1,219585,29823,189762,177162,1,105677,30.53889799118042,False,True,
-before_mcp_full,q4_orders,1,220865,30180,190685,177947,1,106716,26.65935778617859,False,True,
-before_mcp_full,q5_spend_x_quality,1,443160,60923,382237,355888,2,215143,43.10408806800842,False,True,
-before_mcp_full,q6_inventory_x_orders,1,439976,59560,380416,355094,2,212245,37.889816999435425,False,True,
-before_mcp_full,q1_spend,2,219837,30044,189793,177020,1,106042,21.37627863883972,False,True,
-before_mcp_full,q2_quality,2,222097,30793,191304,178251,1,107952,20.005662202835083,False,True,
-before_mcp_full,q3_inventory,2,219749,29882,189867,177188,1,105697,31.46631669998169,False,True,
-before_mcp_full,q4_orders,2,222530,30638,191892,179005,1,108006,28.779341220855713,False,True,
-before_mcp_full,q5_spend_x_quality,2,446087,61189,384898,357460,2,216675,53.365941286087036,False,True,
-before_mcp_full,q6_inventory_x_orders,2,342105,49255,292850,228301,2,179462,33.710017919540405,False,True,
-now_mcp_apps,q1_spend,0,190620,941,189679,158132,1,1213,20.280181169509888,True,True,
-now_mcp_apps,q2_quality,0,192332,1098,191234,178225,1,1474,20.721759796142578,True,True,
-now_mcp_apps,q3_inventory,0,190362,857,189505,177072,1,1181,19.918372869491577,True,True,
-now_mcp_apps,q4_orders,0,191650,917,190733,177926,1,1214,21.05329704284668,True,True,
-now_mcp_apps,q5_spend_x_quality,0,384230,1740,382490,356032,2,2677,42.15483331680298,True,True,
-now_mcp_apps,q6_inventory_x_orders,0,381448,1345,380103,354976,2,2380,37.366271018981934,True,True,
-now_mcp_apps,q1_spend,1,190648,955,189693,177009,1,1213,20.51155972480774,True,True,
-now_mcp_apps,q2_quality,1,192444,1131,191313,178241,1,1480,21.359331130981445,True,True,
-now_mcp_apps,q3_inventory,1,190673,846,189827,177214,1,1181,20.270442008972168,True,True,
-now_mcp_apps,q4_orders,1,191454,909,190545,149632,1,1214,19.503926992416382,True,True,
-now_mcp_apps,q5_spend_x_quality,1,429849,1546,428303,396683,2,2550,58.688339948654175,True,True,
-now_mcp_apps,q6_inventory_x_orders,1,381309,1290,380019,354942,2,2380,36.379552125930786,True,True,
-now_mcp_apps,q1_spend,2,190400,961,189439,176923,1,1213,20.437208652496338,True,True,
-now_mcp_apps,q2_quality,2,192989,1113,191876,178447,1,1474,22.025003910064697,True,True,
-now_mcp_apps,q3_inventory,2,190402,849,189553,177091,1,1181,21.527310848236084,True,True,
-now_mcp_apps,q4_orders,2,191580,913,190667,158260,1,1214,20.186895847320557,True,True,
-now_mcp_apps,q5_spend_x_quality,2,383461,1660,381801,355769,2,2677,38.2059440612793,True,True,
-now_mcp_apps,q6_inventory_x_orders,2,381317,1281,380036,354336,2,2374,35.01955604553223,True,True,
-appendix_toolset,q1_spend,0,204601,204601,0,118581,0,0,16.850514888763428,True,True,
-appendix_toolset,q2_quality,0,206230,206230,0,161364,0,0,16.65128183364868,True,True,
-appendix_toolset,q3_inventory,0,204284,204284,0,160196,0,0,15.621726989746094,True,True,
-appendix_toolset,q4_orders,0,205350,205350,0,160886,0,0,16.30192518234253,True,True,
-appendix_toolset,q5_spend_x_quality,0,409322,409322,0,353774,0,0,39.91209387779236,True,True,
-appendix_toolset,q6_inventory_x_orders,0,250132,250132,0,209443,0,0,14.711781024932861,False,True,
-appendix_toolset,q1_spend,1,204554,204554,0,190844,0,0,16.41181182861328,True,True,
-appendix_toolset,q2_quality,1,206091,206091,0,192999,0,0,15.957220077514648,True,True,
-appendix_toolset,q3_inventory,1,204227,204227,0,191814,0,0,15.504981994628906,True,True,
-appendix_toolset,q4_orders,1,205526,205526,0,192736,0,0,16.441861867904663,True,True,
-appendix_toolset,q5_spend_x_quality,1,408022,408022,0,390118,0,0,32.70573091506958,True,True,
-appendix_toolset,q6_inventory_x_orders,1,250830,250830,0,228672,0,0,17.85652184486389,False,True,
-appendix_toolset,q1_spend,2,204247,204247,0,191740,0,0,15.345771074295044,True,True,
-appendix_toolset,q2_quality,2,206446,206446,0,193142,0,0,17.32624912261963,True,True,
-appendix_toolset,q3_inventory,2,204210,204210,0,191835,0,0,14.966753959655762,True,True,
-appendix_toolset,q4_orders,2,205499,205499,0,173731,0,0,17.27717113494873,True,True,
-appendix_toolset,q5_spend_x_quality,2,410038,410038,0,390860,0,0,41.35780191421509,True,True,
-appendix_toolset,q6_inventory_x_orders,2,249884,249884,0,246185,0,0,15.656089067459106,False,True,
+pattern,question,rep,credits,seconds,correct,chart,orchestrator_tokens,specialist_tokens,total_tokens,full_price_tokens,specialist_calls,kb_to_orchestrator,answer,error
+before_sproc,q1_spend,0,0.1211026799999999,25.173087120056152,False,True,81056.0,77947.0,159003.0,34743.0,1.0,0.0,"        
+
+Here are the top 5 suppliers ranked by total purchase spend:
+
+| Rank | Supplier | Total Spend |
+|------|----------|-------------|
+| 1 | SUP-003 | ~$8.83M |
+| 2 | SUP-045 | ~$8.61M |
+| 3 | SUP-013 | ~$8.56M |
+| 4 | SUP-035 | ~$8.52M |
+| 5 | SUP-058 | ~$8.34M |
+
+  
+
+The spend across these five suppliers is notably tight — all fall within a ~$500K range ($8.34M–$8.83M), suggesting fairly balanced purchasing concentration across top vendors. **SUP-003** leads the group at approximately **$8.83M**. ",
+before_sproc,q2_quality,0,0.25981568,83.2896192073822,True,True,146411.0,241869.0,388280.0,66263.0,2.0,0.0,"               Here are the 5 suppliers with the worst defect rates — all exceeding 1,000 PPM:
+
+| Rank | Supplier ID | Supplier Name | Defect PPM |
+|------|-------------|---------------|------------|
+| 1 | SUP-020 | Supplier 020 | 1,150.75 |
+| 2 | SUP-009 | Supplier 009 | 1,111.53 |
+| 3 | SUP-005 | Supplier 005 | 1,103.45 |
+| 4 | SUP-046 | Supplier 046 | 1,064.89 |
+| 5 | SUP-017 | Supplier 017 | 1,002.43 |
+
+  
+
+**SUP-020** is the worst offender at **1,150.75 PPM**, with SUP-009 and SUP-005 close behind. Notably, all five suppliers exceed 1,000 PPM, suggesting a broader systemic quality issue worth investigating across this group. ",
+before_sproc,q3_inventory,0,0.16931756,208.40109419822693,True,True,80758.0,155363.0,236121.0,48016.0,2.0,0.0,"       Here's the count of part-plant positions below safety stock at each plant:
+
+| Plant | Below Safety Stock |
+|---|---|
+| Guadalajara | 108 |
+| Penang | 104 |
+| Lisle | 102 |
+| Shannon | 96 |
+| Chengdu | 92 |
+
+**Total: 502 positions** across all five plants. Guadalajara leads with 108, while Chengdu has the fewest at 92 — though all plants show meaningful exposure with a relatively tight range (92–108).
+
+  ",
+before_sproc,q4_orders,0,0.1365274799999999,33.05155301094055,True,True,102192.0,78843.0,181035.0,38028.0,1.0,0.0,"           
+
+Here is the open backlog value by plant:
+
+| Plant | Open Backlog Value |
+|---|---|
+| Chengdu | $11,668,709 |
+| Guadalajara | $11,562,018 |
+| Lisle | $11,478,848 |
+| Penang | $11,224,336 |
+| Shannon | $11,191,465 |
+
+Values are closely clustered across all five plants, ranging from **$11.19M** (Shannon) to **$11.67M** (Chengdu).
+
+  ",
+before_sproc,q5_spend_x_quality,0,0.52322556,125.18473720550536,True,True,192057.0,483762.0,675819.0,143988.0,4.0,0.0,"                       
+
+Here are the defect rates in PPM for the top 5 suppliers by purchase spend:
+
+| Supplier | Defect Rate (PPM) |
+|----------|----------------:|
+| SUP-001 | 727.98 |
+| SUP-002 | 772.20 |
+| SUP-003 | 863.02 |
+| SUP-004 | 974.77 |
+| SUP-005 | 1,103.45 |
+
+  
+
+**Key observations:**
+- **SUP-005** has the highest defect rate at **1,103 PPM**, while **SUP-001** is the best performer at **728 PPM** — a spread of ~375 PPM across the group.
+- There is a consistent escalation in defect rates from SUP-001 through SUP-005, suggesting a clear quality differentiation among these high-spend suppliers.
+- Despite all five being top spenders (ranging from ~$7.7M to ~$8.8M), their quality performance varies meaningfully, which may warrant quality improvement discussions especially with SUP-004 and SUP-005. ",
+before_sproc,q6_inventory_x_orders,0,0.17288736,36.1812219619751,True,False,43144.0,171711.0,214855.0,52760.0,2.0,0.0,"     
+
+**Guadalajara** has the most parts below safety stock with **108 parts**, and its open backlog value is **$11,562,018.01**. ",
+before_sproc,q1_spend,1,0.13503252,31.469908952713013,False,True,101687.0,77888.0,179575.0,37955.0,1.0,0.0,"          Here are the top 5 suppliers by total purchase spend:
+
+| Rank | Supplier | Total Spend |
+|------|----------|-------------|
+| 1 | SUP-003 | ~$8.83M |
+| 2 | SUP-045 | ~$8.61M |
+| 3 | SUP-013 | ~$8.56M |
+| 4 | SUP-035 | ~$8.52M |
+| 5 | SUP-058 | ~$8.34M |
+
+  
+
+Notably, spend is tightly clustered — the gap between the top supplier (SUP-003) and the fifth (SUP-058) is only ~$490K, suggesting a fairly balanced vendor portfolio at the top end. ",
+before_sproc,q2_quality,1,0.34241756,100.61160588264464,True,True,198204.0,359466.0,557670.0,79966.0,3.0,0.0,"                      Here are the 5 suppliers with the worst defect rates — all exceeding **1,000 PPM**:
+
+| Rank | Supplier ID | Defect Rate (PPM) |
+|------|-------------|-------------------|
+| 1 | SUP-020 | 1,150.75 |
+| 2 | SUP-009 | 1,111.53 |
+| 3 | SUP-005 | 1,103.45 |
+| 4 | SUP-046 | 1,064.89 |
+| 5 | SUP-017 | 1,002.43 |
+
+**SUP-020** leads with the highest defect rate at **1,150.75 PPM**, roughly 15% above the 5th-ranked **SUP-017** (1,002.43 PPM).
+
+  ",
+before_sproc,q3_inventory,1,0.2126842,55.59158086776733,True,True,102483.0,196200.0,298683.0,57908.0,2.0,0.0,"          
+
+Across all 5 plants, there are 502 total part-plant positions below safety stock. Here's the breakdown:
+
+| Plant | Positions Below Safety Stock |
+|---|---|
+| Guadalajara | 108 |
+| Penang | 104 |
+| Lisle | 102 |
+| Shannon | 96 |
+| Chengdu | 92 |
+
+  
+
+The spread is fairly tight — only **16 positions** separate Guadalajara (highest, 108) from Chengdu (lowest, 92), suggesting inventory health is relatively consistent across plants, though Guadalajara warrants the closest attention. ",
+before_sproc,q4_orders,1,0.1346106,27.60016703605652,False,True,101865.0,77903.0,179768.0,37903.0,1.0,0.0,"   
+
+Here is the open backlog value by plant:
+
+        All five plants have relatively close open backlog values, ranging from **$11.19M to $11.67M** — a spread of about $477K.
+
+  
+
+**Chengdu** leads at **$11.67M**, followed by **Guadalajara** ($11.56M), **Lisle** ($11.48M), **Penang** ($11.22M), and **Shannon** ($11.19M). ",
+before_sproc,q1_spend,2,0.1468908,25.96974301338196,False,True,81238.0,77865.0,159103.0,46178.0,1.0,0.0,"       Here are the top 5 suppliers by total purchase spend:
+
+| Rank | Supplier | Total Spend |
+|------|----------|-------------|
+| 1 | SUP-003 | ~$8.83M |
+| 2 | SUP-045 | ~$8.61M |
+| 3 | SUP-013 | ~$8.56M |
+| 4 | SUP-035 | ~$8.52M |
+| 5 | SUP-058 | ~$8.34M |
+
+  
+
+Notably, spend is tightly clustered across all five suppliers — the gap between #1 (SUP-003) and #5 (SUP-058) is only ~$497K, suggesting fairly balanced supplier distribution. ",
+before_sproc,q2_quality,2,0.4053916799999999,96.43850994110107,True,True,196191.0,359712.0,555903.0,109296.0,3.0,0.0,"                       
+
+Here are the 5 suppliers with the highest defect rates:
+
+| Rank | Supplier ID | Defect Rate (PPM) |
+|------|-------------|-------------------|
+| 1 | SUP-020 | 1,150.75 |
+| 2 | SUP-009 | 1,111.53 |
+| 3 | SUP-005 | 1,103.45 |
+| 4 | SUP-046 | 1,064.89 |
+| 5 | SUP-017 | 1,002.43 |
+
+All five suppliers exceed **1,000 PPM**, signaling systemic quality concerns across this group. SUP-020 is the worst offender at 1,150.75 PPM — roughly 15% above SUP-017 at the bottom of the list.
+
+  ",
+before_sproc,q3_inventory,2,0.28668116,82.33110976219177,True,True,210548.0,250983.0,461531.0,70481.0,3.0,0.0,"   
+
+
+
+**Guadalajara** has the most at-risk positions at **108**, while **Chengdu** has the fewest at **92** — a spread of just 16 positions across all five plants.                     Here's a summary of part-plant positions below safety stock across all five plants:
+
+| Plant | Positions Below Safety Stock |
+|---|---|
+| Guadalajara | 108 |
+| Penang | 104 |
+| Lisle | 102 |
+| Shannon | 96 |
+| Chengdu | 92 |
+
+**Guadalajara** has the most at-risk positions (108), while **Chengdu** has the fewest (92). The spread is tight — only 16 positions separate the highest from the lowest plant.
+
+  ",
+before_sproc,q4_orders,2,0.3735928399999999,87.25859808921814,True,True,192573.0,314437.0,507010.0,102387.0,3.0,0.0,"                       
+
+Here is the open backlog value for all five plants:
+
+| Plant | Open Backlog Value |
+|---|---|
+| Chengdu | $11,668,709 |
+| Guadalajara | $11,562,018 |
+| Lisle | $11,478,848 |
+| Penang | $11,224,336 |
+| Shannon | $11,191,465 |
+
+All plants are tightly clustered between **$11.2M and $11.7M**, with a spread of roughly **$477K**. Chengdu holds the highest backlog and Shannon the lowest.
+
+  ",
+before_sproc,q5_spend_x_quality,2,0.49055088,136.9593210220337,True,True,199219.0,484890.0,684109.0,125612.0,4.0,0.0,"                           
+
+Here are the top 5 suppliers by purchase spend along with their defect rates:
+
+| Supplier | Total Spend | Defect Rate (PPM) |
+|----------|-------------|-------------------|
+| SUP-003 | $8,832,900 | 863.02 |
+| SUP-045 | $8,605,220 | 941.00 |
+| SUP-013 | $8,559,233 | 735.97 |
+| SUP-035 | $8,516,888 | 887.04 |
+| SUP-058 | $8,335,578 | 982.71 |
+
+The spend range is tight (~$497K spread), but PPM varies more noticeably — **SUP-058** has the worst defect rate at **982.71 PPM** despite being the lowest spender of the group, while **SUP-013** is the best performer at **735.97 PPM**.
+
+  ",
+before_sproc,q6_inventory_x_orders,2,0.13625656,37.2059531211853,True,False,43146.0,199527.0,242673.0,32786.0,2.0,0.0,"     
+
+**Guadalajara** has the most parts below safety stock with **108 parts**, and its open backlog value is **$11,562,018.01**. ",
+before_mcp_full,q1_spend,0,0.10264,14.4,True,False,11978.0,77845.0,89823.0,35721.0,1.0,35.0,"The top 5 suppliers by total purchase spend are **SUP-003** ($8,832,900), **SUP-045** ($8,605,220), **SUP-013** ($8,559,233), **SUP-035** ($8,516,888), and **SUP-058** ($8,335,578). SUP-003 leads the ranking, though the spend is notably tight across all five suppliers, with only ~$497K separating the highest from the lowest.
+
+<chart>toolu_bdrk_01EJcZAiuRPvyERjiXHwdsdo</chart>",
+before_mcp_full,q2_quality,0,0.10265,15.7,True,False,12001.0,77966.0,89967.0,35753.0,1.0,34.7,"The 5 suppliers with the worst defect rates are **SUP-020** (1,150.8 PPM), **SUP-009** (1,111.5 PPM), **SUP-005** (1,103.4 PPM), **SUP-046** (1,064.9 PPM), and **SUP-017** (1,002.4 PPM). Notably, all five suppliers exceed the 1,000 PPM threshold, suggesting widespread quality concerns across this group. SUP-020 leads the list with the highest defect rate, approximately 15% worse than the fifth-ranked SUP-017.
+
+<chart>toolu_bdrk_015r6ySE21suHVCiCDmMP2Q8</chart>",
+before_mcp_full,q3_inventory,0,0.078,14.5,True,False,11740.0,77591.0,89331.0,24965.0,1.0,34.7,"Across all five plants, **Guadalajara** has the highest number of part-plant positions below safety stock at **108**, followed by **Penang (104)**, **Lisle (102)**, **Shannon (96)**, and **Chengdu (92)**. The counts are relatively close across all plants, spanning a range of just 16 positions from highest to lowest.",
+before_mcp_full,q4_orders,0,0.07857,15.1,True,False,12035.0,78182.0,90217.0,24620.0,1.0,35.3,"The open backlog value by plant is as follows: **Chengdu** leads at **$11,668,709**, followed by **Guadalajara** at **$11,562,018**, **Lisle** at **$11,478,848**, **Penang** at **$11,224,336**, and **Shannon** at **$11,191,465**. All five plants are closely grouped within a narrow range of approximately $477K from highest to lowest, suggesting relatively balanced workload distribution across facilities.",
+before_mcp_full,q5_spend_x_quality,0,0.27094,36.1,True,False,55242.0,241343.0,296585.0,88279.0,2.0,116.0,"Among the 5 highest-spend suppliers (SUP-003, SUP-045, SUP-013, SUP-035, and SUP-058), defect rates range from 736 to 983 PPM. **SUP-058** has the highest defect rate at **983 PPM**, followed by SUP-045 (941 PPM), SUP-035 (887 PPM), and SUP-003 (863 PPM). Notably, **SUP-013** — the #3 supplier by spend at $8.56M — has the best quality among this group at just **736 PPM**, approximately 25% lower than the worst performer despite similar spend levels.",
+before_mcp_full,q6_inventory_x_orders,0,0.23064,29.1,True,False,41472.0,171482.0,212954.0,80186.0,2.0,78.6,"**Guadalajara** is the plant with the most parts below safety stock, with **108 parts** in shortage. The open backlog value for Guadalajara is **$11,562,018.01**.",
+before_mcp_full,q1_spend,1,0.0771,16.7,True,False,11938.0,77850.0,89788.0,24308.0,1.0,35.0,"The top 5 suppliers by total purchase spend are **SUP-003** ($8,832,900), **SUP-045** ($8,605,220), **SUP-013** ($8,559,233), **SUP-035** ($8,516,888), and **SUP-058** ($8,335,578). SUP-003 leads the group with the highest spend, while all five suppliers fall within a relatively narrow range of approximately $500K of each other.",
+before_mcp_full,q2_quality,1,0.07923,18.6,True,False,12182.0,78375.0,90557.0,24810.0,1.0,35.3,"The 5 suppliers with the worst defect rates are **SUP-020** (1,150.75 PPM), **SUP-009** (1,111.53 PPM), **SUP-005** (1,103.45 PPM), **SUP-046** (1,064.89 PPM), and **SUP-017** (1,002.43 PPM). Notably, all five suppliers exceed the 1,000 PPM threshold, indicating a broad quality concern across this group. SUP-020 has the highest defect rate, approximately 15% worse than the fifth-ranked SUP-017.
+
+<chart>toolu_bdrk_01BAv3kj3Ds4e4wv7JPCjKGy</chart>",
+before_mcp_full,q3_inventory,1,0.07624,16.3,True,False,11793.0,77654.0,89447.0,24075.0,1.0,34.9,"Across all five plants, the number of part-plant positions below safety stock ranges from **92 to 108**. **Guadalajara** has the most at-risk positions with **108**, followed by **Penang** (104), **Lisle** (102), **Shannon** (96), and **Chengdu** (92). The spread across plants is relatively tight at just 16 positions, suggesting a systemic inventory challenge rather than an isolated issue at any single location.",
+before_mcp_full,q4_orders,1,0.07628,13.6,True,False,11889.0,77795.0,89684.0,24166.0,1.0,34.7,"The open backlog value by plant is as follows: **Chengdu** leads at **$11,668,709**, followed by **Guadalajara** at **$11,562,018**, **Lisle** at **$11,478,848**, **Penang** at **$11,224,336**, and **Shannon** at **$11,191,465**. All five plants are remarkably balanced, with a total spread of only ~$477K between the highest and lowest values.
+
+<chart>toolu_bdrk_017S912KUfFun8kv1ZA2TU24</chart>",
+before_mcp_full,q5_spend_x_quality,1,0.25815,40.0,True,False,55630.0,241954.0,297584.0,81898.0,2.0,116.6,"Among the 5 highest-spend suppliers (SUP-003, SUP-045, SUP-013, SUP-035, and SUP-058), defect rates in PPM range from 736 to 983. Notably, **SUP-058** — the 5th highest in spend — has the **worst quality** at **983 PPM**, while **SUP-013** has the lowest defect rate at **736 PPM**. Interestingly, **SUP-003**, the top spend supplier at $8.8M, has a relatively moderate defect rate of **863 PPM**, suggesting that high spend does not necessarily correlate with poor quality in this group.
+
+| Supplier | Total Spend (USD) | Defect Rate (PPM) |
+|---|---|---|
+| SUP-003 | $8,832,900 | 863 |
+| SUP-045 | $8,605,220 | 941 |
+| SUP-013 | $8,559,233 | 736 |
+| SUP-035 | $8,516,888 | 887 |
+| SUP-058 | $8,335,578 | 983 |",
+before_mcp_full,q6_inventory_x_orders,1,0.21467,27.9,True,False,41348.0,171260.0,212608.0,73212.0,2.0,78.4,"**Guadalajara** is the plant with the most parts below safety stock, with **108 parts** in shortage. Its open backlog value is **$11,562,018.01**. This combination of the highest inventory shortfall and over $11.5M in unfulfilled orders makes Guadalajara a critical focus area for supply chain attention.",
+before_mcp_full,q1_spend,2,0.07707,15.5,True,False,11942.0,77845.0,89787.0,24304.0,1.0,35.0,"The top 5 suppliers by total purchase spend are **SUP-003** ($8,832,900), **SUP-045** ($8,605,220), **SUP-013** ($8,559,233), **SUP-035** ($8,516,888), and **SUP-058** ($8,335,578). Notably, the spend across all five suppliers is remarkably close, with less than $500K separating the highest (SUP-003) from the fifth (SUP-058).",
+before_mcp_full,q2_quality,2,0.07703,15.1,True,False,11952.0,77969.0,89921.0,24306.0,1.0,34.8,"The 5 suppliers with the worst defect rates are **SUP-020** (1,150.75 PPM), **SUP-009** (1,111.53 PPM), **SUP-005** (1,103.45 PPM), **SUP-046** (1,064.89 PPM), and **SUP-017** (1,002.43 PPM). Notably, all five suppliers exceed **1,000 PPM**, suggesting a broader quality issue across this group rather than an isolated problem with a single supplier.",
+before_mcp_full,q3_inventory,2,0.07584,14.6,True,False,11770.0,77598.0,89368.0,23987.0,1.0,34.8,"Across all five plants, the number of part-plant positions below safety stock ranges from **92 to 108**. **Guadalajara** has the most at **108**, followed by **Penang (104)**, **Lisle (102)**, **Shannon (96)**, and **Chengdu (92)**. The values are relatively close across plants, with only a 16-position spread from highest to lowest.",
+before_mcp_full,q4_orders,2,0.07785,15.1,True,False,12010.0,78065.0,90075.0,24489.0,1.0,35.1,"The open backlog value across all five plants is closely clustered between ~$11.2M and ~$11.7M. **Chengdu** leads with **$11,668,709**, followed by **Guadalajara** ($11,562,018), **Lisle** ($11,478,848), **Penang** ($11,224,336), and **Shannon** at the lowest with **$11,191,465**. The total spread between the highest and lowest plant is approximately **$477,000**, indicating relatively balanced backlog distribution across manufacturing locations.
+
+<chart>toolu_bdrk_01BWqan5t1i3FHMdQFBQ6gAy</chart>",
+before_mcp_full,q5_spend_x_quality,2,0.25913,39.7,True,False,55764.0,242271.0,298035.0,82152.0,2.0,116.9,"Among the 5 highest-spend suppliers (SUP-003, SUP-045, SUP-013, SUP-035, and SUP-058), defect rates range from 736 to 983 PPM. **SUP-058** has the highest defect rate at **982.7 PPM**, followed by SUP-045 (941.0 PPM), SUP-035 (887.0 PPM), and SUP-003 (863.0 PPM). **SUP-013** is the best quality performer of the group at **736.0 PPM** — notably, the top spend supplier (SUP-003 at $8.83M) ranks 4th in defect rate, while the 5th-highest spender (SUP-058 at $8.34M) has the worst quality.",
+before_mcp_full,q6_inventory_x_orders,2,0.09093,23.8,True,False,20987.0,108742.0,129729.0,26389.0,2.0,47.4,"**Guadalajara** is the plant with the most parts below safety stock, with **108 parts** currently falling short of their safety stock thresholds. The open backlog value for Guadalajara is **$11,562,018.01**.",
+now_mcp_apps,q1_spend,0,0.0504,14.3,True,True,1015.0,77842.0,78857.0,13376.0,1.0,1.5,"The **top 5 suppliers by total purchase spend** are:
+
+1. **SUP-003** – $8,832,900.19
+2. **SUP-045** – $8,605,220.38
+3. **SUP-013** – $8,559,232.60
+4. **SUP-035** – $8,516,887.76
+5. **SUP-058** – $8,335,577.66
+
+SUP-003 leads the group with the highest spend at approximately **$8.83M**, while all five suppliers are tightly clustered within a **~$500K range** of each other, suggesting relatively balanced purchasing distribution among top vendors.",
+now_mcp_apps,q2_quality,0,0.05032,15.6,True,True,1024.0,77971.0,78995.0,13374.0,1.0,1.5,"The 5 suppliers with the worst defect rates in PPM are **SUP-020** (1,150.75 PPM), **SUP-009** (1,111.53 PPM), **SUP-005** (1,103.45 PPM), **SUP-046** (1,064.89 PPM), and **SUP-017** (1,002.43 PPM). Notably, all five suppliers exceed the 1,000 PPM threshold, indicating significant quality concerns across this group. SUP-020 leads with the highest defect rate, approximately 148 PPM above the fifth-ranked supplier, SUP-017.",
+now_mcp_apps,q3_inventory,0,0.04964,14.7,True,True,908.0,77644.0,78552.0,13177.0,1.0,1.5,"Across all five plants, there are a total of **502 part-plant positions below safety stock**. **Guadalajara** has the most at-risk positions with **108**, followed by **Penang (104)** and **Lisle (102)**. **Shannon** has **96** positions below safety stock, while **Chengdu** has the fewest at **92**.",
+now_mcp_apps,q4_orders,0,0.05116,14.4,True,True,1022.0,78146.0,79168.0,13524.0,1.0,1.4,"## Open Backlog Value by Plant
+
+The open backlog values across all five plants are closely clustered, ranging from **$11.19M to $11.67M**. Here is the breakdown ranked highest to lowest:
+
+| Plant | Open Backlog (USD) |
+|---|---|
+| **Chengdu** | $11,668,709.30 |
+| **Guadalajara** | $11,562,018.01 |
+| **Lisle** | $11,478,848.22 |
+| **Penang** | $11,224,335.60 |
+| **Shannon** | $11,191,465.18 |
+
+**Chengdu** leads with the highest open backlog at ~$11.67M, while **Shannon** has the lowest at ~$11.19M — a total spread of less than **$500K** across all plants, indicating a remarkably balanced distribution of open orders.",
+now_mcp_apps,q5_spend_x_quality,0,0.14448,37.9,True,True,2624.0,241968.0,244592.0,35850.0,2.0,3.5,"Among the top 5 suppliers by purchase spend, **Supplier 058** (spend: $8.34M) has the highest defect rate at **982.7 PPM**, followed by **Supplier 045** ($8.61M) at **941.0 PPM**, **Supplier 035** ($8.52M) at **887.0 PPM**, **Supplier 003** ($8.83M) at **863.0 PPM**, and **Supplier 013** ($8.56M) at **735.9 PPM**. Notably, the highest-spend supplier (Supplier 003) does not correspond to the highest defect rate, while Supplier 058 — the lowest spender of the five — carries the worst quality performance. All five suppliers exhibit elevated defect rates, ranging from ~736 to ~983 PPM, which warrants close quality monitoring across the board.",
+now_mcp_apps,q6_inventory_x_orders,0,0.05816,20.6,True,False,1221.0,108804.0,110025.0,13442.0,2.0,1.3,"The plant with the most parts below safety stock is **Guadalajara**, which has **108 parts** currently below their safety stock level. The open backlog value for the Guadalajara plant is **$11,562,018.01**.",
+now_mcp_apps,q1_spend,1,0.05033,14.5,True,True,1014.0,77838.0,78852.0,13365.0,1.0,1.5,"The **top 5 suppliers by total purchase spend** are:
+
+1. **SUP-003** – $8,832,900.19
+2. **SUP-045** – $8,605,220.38
+3. **SUP-013** – $8,559,232.60
+4. **SUP-035** – $8,516,887.76
+5. **SUP-058** – $8,335,577.66
+
+SUP-003 leads the group with the highest spend at approximately **$8.83M**, while all five suppliers fall within a narrow range of roughly **$500K of each other**, indicating a fairly concentrated distribution of purchase spend among the top vendors.",
+now_mcp_apps,q2_quality,1,0.05064,14.5,True,True,1035.0,78014.0,79049.0,13430.0,1.0,1.6,"The 5 suppliers with the worst defect rates in PPM are **SUP-020** (1,150.75 PPM), **SUP-009** (1,111.53 PPM), **SUP-005** (1,103.45 PPM), **SUP-046** (1,064.89 PPM), and **SUP-017** (1,002.43 PPM). Notably, all five suppliers exceed the **1,000 PPM threshold**, indicating a systemic quality issue across this group. SUP-020 leads with the highest defect rate, approximately **148 PPM higher** than the fifth-worst supplier, SUP-017.",
+now_mcp_apps,q3_inventory,1,0.05074,16.5,True,True,925.0,77943.0,78868.0,13370.0,1.0,1.6,"Across all five plants, the part-plant positions below safety stock are as follows: **Guadalajara** leads with **108**, followed by **Penang** (104), **Lisle** (102), **Shannon** (96), and **Chengdu** (92). The total across all plants is **502 positions** below safety stock. Notably, the spread is relatively tight, with only 16 positions separating the highest (Guadalajara) from the lowest (Chengdu).",
+now_mcp_apps,q4_orders,1,0.04994,14.2,True,True,1017.0,77829.0,78846.0,13325.0,1.0,1.5,"## Open Backlog Value by Plant
+
+All five plants are closely matched in open backlog value. Here is the breakdown ranked from highest to lowest:
+
+| Plant | Open Backlog (USD) |
+|---|---|
+| **Chengdu** | $11,668,709.30 |
+| **Guadalajara** | $11,562,018.01 |
+| **Lisle** | $11,478,848.22 |
+| **Penang** | $11,224,335.60 |
+| **Shannon** | $11,191,465.18 |
+
+The values range from a high of **$11.67M (Chengdu)** to a low of **$11.19M (Shannon)**, a difference of only ~$477K across all plants. Chengdu leads slightly, followed closely by Guadalajara and Lisle.",
+now_mcp_apps,q5_spend_x_quality,1,0.12617,37.7,True,True,2537.0,241277.0,243814.0,28415.0,2.0,3.3,"Among the top 5 suppliers by purchase spend, **SUP-058** has the highest defect rate at **982.7 PPM**, followed by **SUP-045** at **941.0 PPM**, **SUP-035** at **887.0 PPM**, **SUP-003** at **863.0 PPM**, and **SUP-013** at the lowest with **736.0 PPM**. Notably, the spend rankings and quality rankings are inversely correlated — SUP-003, which leads in spend at $8.83M, has a relatively lower defect rate, while SUP-058, the lowest spender of the five at $8.34M, has the worst quality performance. All five suppliers fall within a defect rate range of approximately **736 to 983 PPM**.",
+now_mcp_apps,q6_inventory_x_orders,1,0.07915,25.1,True,True,1723.0,170949.0,172672.0,16535.0,2.0,1.9,"**Guadalajara** is the plant with the most parts below safety stock, with **108 parts** falling below that threshold. The open backlog value for Guadalajara is **$11,562,018.01**.",
+now_mcp_apps,q1_spend,2,0.05051,14.8,True,True,986.0,77912.0,78898.0,13368.0,1.0,1.5,"The top 5 suppliers by total purchase spend are **SUP-003** ($8,832,900.19), **SUP-045** ($8,605,220.38), **SUP-013** ($8,559,232.60), **SUP-035** ($8,516,887.76), and **SUP-058** ($8,335,577.66). SUP-003 leads the group with the highest spend, while SUP-058 rounds out the bottom of the top five. Notably, the spend across all five suppliers is quite concentrated, with a relatively narrow range of approximately **$497K** separating the highest from the lowest.",
+now_mcp_apps,q2_quality,2,0.05042,17.2,True,True,1028.0,77973.0,79001.0,13392.0,1.0,1.6,"The 5 suppliers with the worst defect rates in PPM are **SUP-020** (1,150.8 PPM), **SUP-009** (1,111.5 PPM), **SUP-005** (1,103.4 PPM), **SUP-046** (1,064.9 PPM), and **SUP-017** (1,002.4 PPM). Notably, all five suppliers exceed the 1,000 PPM threshold, indicating significant quality concerns across this entire group. SUP-020 leads the list with the highest defect rate, approximately 15% higher than the fifth-ranked SUP-017.",
+now_mcp_apps,q3_inventory,2,0.04969,14.6,True,True,923.0,77666.0,78589.0,13197.0,1.0,1.5,"Across all five plants, there are a significant number of part-plant positions currently below safety stock. **Guadalajara** has the most at-risk positions with **108**, followed by **Penang (104)**, **Lisle (102)**, **Shannon (96)**, and **Chengdu (92)**. In total, **502 part-plant positions** are below safety stock across the network, signaling broad inventory replenishment needs.",
+now_mcp_apps,q4_orders,2,0.04981,16.1,True,True,1016.0,77800.0,78816.0,13303.0,1.0,1.4,"## Open Backlog Value by Plant
+
+The open backlog values are closely clustered across all five plants, ranging from **$11.19M to $11.67M**. Here is the breakdown ranked from highest to lowest:
+
+| Plant | Open Backlog (USD) |
+|---|---|
+| **Chengdu** | $11,668,709.30 |
+| **Guadalajara** | $11,562,018.01 |
+| **Lisle** | $11,478,848.22 |
+| **Penang** | $11,224,335.60 |
+| **Shannon** | $11,191,465.18 |
+
+**Chengdu** leads with the highest open backlog at **$11.67M**, while **Shannon** has the lowest at **$11.19M** — a difference of only ~$477K, indicating a fairly balanced distribution of open orders across all plants.",
+now_mcp_apps,q5_spend_x_quality,2,0.13177,40.2,True,True,2539.0,242953.0,245492.0,29337.0,2.0,3.3,"Among the top 5 suppliers by purchase spend, **Supplier 058** has the highest defect rate at **982.7 PPM**, followed by **Supplier 045** at **941.0 PPM**, **Supplier 035** at **887.0 PPM**, **Supplier 003** at **863.0 PPM**, and **Supplier 013** with the lowest defect rate at **736.0 PPM**. Notably, despite Supplier 003 leading in spend at $8.83M, it maintains a relatively low defect rate, while Supplier 058 — the lowest spender of the group at $8.34M — has the worst quality performance. All five suppliers fall within a PPM range of roughly 736 to 983, suggesting moderate but varying quality levels across the top spenders.",
+now_mcp_apps,q6_inventory_x_orders,2,0.08087,25.1,True,True,1731.0,171382.0,173113.0,16815.0,2.0,2.0,"The plant with the most parts below safety stock is **Guadalajara**, with **108 parts** falling below safety stock levels. The open backlog value for the Guadalajara plant is **$11,562,018.01**.",
+appendix_toolset,q1_spend,0,0.1128778,16.033159971237183,True,True,139901.0,0.0,139901.0,34110.0,0.0,0.0,"              Here are the top 5 suppliers by total purchase spend:
+
+  
+
+The rankings are fairly close, spanning a range of roughly $500K between first and fifth place:
+
+1. **Supplier 003** — $8.83M
+2. **Supplier 045** — $8.61M
+3. **Supplier 013** — $8.56M
+4. **Supplier 035** — $8.52M
+5. **Supplier 058** — $8.34M
+
+  ",
+appendix_toolset,q2_quality,0,0.08121432,12.86333179473877,True,True,88187.0,0.0,88187.0,26314.0,0.0,0.0,"        
+
+Here are the 5 suppliers with the worst defect rates:
+
+  
+
+**SUP-020** leads with the highest defect rate at **1,150.75 PPM**, followed closely by SUP-009 (1,111.53 PPM) and SUP-005 (1,103.45 PPM). All five suppliers exceed **1,000 PPM**, indicating a broad quality concern worth investigating.
+
+  ",
+appendix_toolset,q3_inventory,0,0.08075044,13.871073246002195,True,True,88011.0,0.0,88011.0,26237.0,0.0,0.0,"        
+
+Here's the count of part-plant positions below safety stock across all five plants:
+
+  
+
+**Guadalajara** leads with the most at-risk positions (108), followed closely by **Penang** (104) and **Lisle** (102). **Shannon** (96) and **Chengdu** (92) are in better shape but still have significant exposure. Across all plants, there are **502** part-plant positions below safety stock in total.
+
+  ",
+appendix_toolset,q4_orders,0,0.08152412,11.03698706626892,True,True,88273.0,0.0,88273.0,26376.0,0.0,0.0,"        
+
+Here is the open backlog value across all five plants. The values are closely grouped, ranging from ~$11.2M to ~$11.7M.
+
+   
+
+**Chengdu** leads with the highest open backlog at **$11.67M**, followed closely by **Guadalajara** ($11.56M) and **Lisle** ($11.48M). **Penang** ($11.22M) and **Shannon** ($11.19M) round out the bottom, though all plants are within a narrow ~$450K range of each other. ",
+appendix_toolset,q5_spend_x_quality,0,0.1504246799999999,51.59540700912476,True,True,205517.0,0.0,205517.0,33772.0,0.0,0.0,"                  
+
+Here are the top 5 suppliers by purchase spend and their corresponding defect rates in PPM:
+
+| Supplier ID | Supplier Name | Total Spend (USD) | Defect PPM |
+|---|---|---|---|
+| SUP-003 | Supplier 003 | $8,832,900 | 863.0 |
+| SUP-045 | Supplier 045 | $8,605,220 | 941.0 |
+| SUP-013 | Supplier 013 | $8,559,233 | 736.0 |
+| SUP-035 | Supplier 035 | $8,516,888 | 887.0 |
+| SUP-058 | Supplier 058 | $8,335,578 | 982.7 |
+
+Spend values are ranked highest to lowest. Defect PPM ranges from **736 (Supplier 013)** to **983 (Supplier 058)**, with no strong correlation between spend volume and quality performance — Supplier 058 has the lowest spend among the five yet the highest defect rate.
+
+  ",
+appendix_toolset,q6_inventory_x_orders,0,0.06360036,14.46247696876526,True,False,107190.0,0.0,107190.0,16218.0,0.0,0.0,"            
+
+**Guadalajara** is the plant with the most parts below safety stock (**108 parts**), and its open backlog value is **$11,562,018.01**. ",
+appendix_toolset,q1_spend,1,0.05018588,12.20972228050232,True,True,88160.0,0.0,88160.0,12386.0,0.0,0.0,"        
+
+Here are the top 5 suppliers by total purchase spend:
+
+   
+
+The spend is tightly clustered — the top supplier (**SUP-003**) leads at **$8.83M**, followed closely by **SUP-045** ($8.61M), **SUP-013** ($8.56M), **SUP-035** ($8.52M), and **SUP-058** ($8.34M), with less than a **$500K spread** across all five. ",
+appendix_toolset,q2_quality,1,0.0517139999999999,13.732630968093872,True,True,88652.0,0.0,88652.0,12655.0,0.0,0.0,"         
+
+Here are the 5 suppliers with the highest defect rates:
+
+  
+
+**SUP-020** leads with the worst quality at **1,150.8 PPM**, followed closely by **SUP-009** (1,111.5 PPM) and **SUP-005** (1,103.4 PPM). All five suppliers exceed **1,000 PPM**, indicating a broader quality concern across this group.
+
+  ",
+appendix_toolset,q3_inventory,1,0.04973316,12.796742916107178,True,True,88063.0,0.0,88063.0,12320.0,0.0,0.0,"        
+
+Here's a breakdown of part-plant positions below safety stock across all five plants:
+
+  
+
+**Guadalajara** leads with the most at-risk positions (108), followed closely by **Penang** (104) and **Lisle** (102). **Shannon** (96) and **Chengdu** (92) are relatively lower but still significant. The spread across plants is fairly narrow — ranging from 92 to 108 — suggesting a systemic inventory challenge rather than one isolated to a single location.
+
+  ",
+appendix_toolset,q4_orders,1,0.05036248,11.296097755432127,True,True,88303.0,0.0,88303.0,12439.0,0.0,0.0,"        
+
+Open backlog value is closely distributed across all five plants, ranging from ~$11.2M to ~$11.7M.
+
+   
+
+**Chengdu** leads with the highest open backlog at **$11.67M**, followed closely by **Guadalajara** ($11.56M) and **Lisle** ($11.48M). **Penang** ($11.22M) and **Shannon** ($11.19M) round out the bottom, though the spread across all plants is relatively tight — only about **$477K** separates the highest from the lowest. ",
+appendix_toolset,q5_spend_x_quality,1,0.12374696,33.02419686317444,True,True,201201.0,0.0,201201.0,28852.0,0.0,0.0,"                 Here are the defect rates (PPM) for the 5 suppliers with the highest purchase spend, sorted by worst quality:
+
+   
+
+**Key observations:**
+- **Supplier 058** has the highest defect rate at **983 PPM** — notable since it ranks 5th in spend (~$8.3M), suggesting a quality risk relative to its spend level.
+- **Supplier 013** has the lowest defect rate among this group at **736 PPM**, while also being the 3rd highest spender (~$8.6M).
+- All five top-spend suppliers fall within a relatively narrow PPM band (736–983), but the spread of ~247 PPM is meaningful at this volume. ",
+appendix_toolset,q6_inventory_x_orders,1,0.04086236,16.57373309135437,True,False,108728.0,0.0,108728.0,4688.0,0.0,0.0,"            
+
+**Guadalajara** is the plant with the most parts below safety stock at **108 parts**, and its open backlog value is **$11,562,018.01**. ",
+appendix_toolset,q1_spend,2,0.05021904,12.496330976486206,True,True,88163.0,0.0,88163.0,12394.0,0.0,0.0,"        
+
+Here are the top 5 suppliers by total purchase spend:
+
+  
+
+The spend is tightly clustered — all five fall between **$8.3M and $8.8M**, suggesting relatively balanced sourcing across top suppliers.
+
+  
+
+**SUP-003** leads with **$8.83M**, followed closely by **SUP-045** ($8.61M), **SUP-013** ($8.56M), **SUP-035** ($8.52M), and **SUP-058** ($8.34M). ",
+appendix_toolset,q2_quality,2,0.05118816,13.322036027908323,True,True,88500.0,0.0,88500.0,12558.0,0.0,0.0,"         
+
+Here are the 5 suppliers with the highest defect rates:
+
+  
+
+**SUP-020** leads with the worst defect rate at **1,150.75 PPM**, followed closely by **SUP-009** (1,111.53 PPM) and **SUP-005** (1,103.45 PPM). All five suppliers exceed **1,000 PPM**, which signals a systemic quality concern across this group.
+
+  ",
+appendix_toolset,q3_inventory,2,0.04949404,12.55803370475769,True,True,88022.0,0.0,88022.0,12279.0,0.0,0.0,"        
+
+Here's a breakdown of part-plant positions currently below safety stock across all five plants:
+
+  
+
+**Guadalajara** leads with the most at-risk positions (108), followed closely by **Penang** (104) and **Lisle** (102). **Shannon** (96) and **Chengdu** (92) are somewhat better positioned but still have a significant number of parts below their safety stock thresholds.
+
+  ",
+appendix_toolset,q4_orders,2,0.04956156,10.80195665359497,True,True,88173.0,0.0,88173.0,12312.0,0.0,0.0,"        
+
+Here is the open backlog value broken down by plant:
+
+  
+
+Chengdu leads with the highest open backlog at ~$11.7M, followed closely by Guadalajara ($11.6M) and Lisle ($11.5M). The plants are fairly balanced, with all five falling within a ~$477K range of each other.
+
+  ",
+appendix_toolset,q5_spend_x_quality,2,0.0856628,23.76874685287476,True,True,196661.0,0.0,196661.0,15092.0,0.0,0.0,"                 Here are the defect rates for the 5 suppliers with the highest purchase spend, ranked by PPM:
+
+  
+
+**SUP-058** has the highest defect rate at **982.7 PPM**, despite being the 5th-largest by spend. **SUP-013**, the 3rd-largest spender, has the best quality among this group at **736.0 PPM**.
+
+  ",
+appendix_toolset,q6_inventory_x_orders,2,0.0380352,15.125330924987791,True,False,107812.0,0.0,107812.0,4256.0,0.0,0.0,"            
+
+**Guadalajara** is the plant with the most parts below safety stock at **108 parts**, and its open backlog value is **$11,562,018.01**. ",
+before_sproc,q5_spend_x_quality,1,0.43809792,113.30560803413391,True,True,178609.0,417662.0,596271.0,119247.0,4.0,0.0,"                       
+
+Here are the top 5 suppliers by purchase spend along with their defect rates:
+
+| Supplier | Total Spend | Defect Rate (PPM) |
+|----------|-------------|-------------------|
+| SUP-003  | $8,832,900  | 863.0             |
+| SUP-045  | $8,605,220  | 941.0             |
+| SUP-013  | $8,559,233  | 736.0             |
+| SUP-035  | $8,516,888  | 887.0             |
+| SUP-058  | $8,335,578  | 982.7             |
+
+**SUP-058** has the highest defect rate at **982.7 PPM** despite having the lowest spend among the five. **SUP-013** is the best performer on quality with only **736.0 PPM**, while spend levels across all five are tightly clustered within a ~$500K range.
+
+  ",
+before_sproc,q6_inventory_x_orders,1,0.17206120000000003,33.79616904258728,True,False,42993.0,171593.0,214586.0,52608.0,2.0,0.0,"     
+
+**Guadalajara** has the most parts below safety stock at **108 parts**. Its total open backlog value is **$11,562,018.01**. ",

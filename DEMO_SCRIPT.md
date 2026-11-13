@@ -20,9 +20,11 @@ specialist's chart straight to your app.
 
 ## 2. The two problems (2 min) · slide 3
 
-> "First, every specialist call brought its whole semantic model and working notes back into the
-> orchestrator's context: about 100 KB per call. Second, what came back was text, so your app had nothing to
-> chart."
+> "There were two ways to build this, and each had a catch. Calling specialists through MCP brought each
+> one's whole semantic model and working notes back into the orchestrator's context, about 50–100 KB per call.
+> Wrapping them in stored procedures with DATA_AGENT_RUN kept the context small, but it returns text only:
+> no tables, no charts, and the orchestrator ends up re-asking specialists for the exact numbers, which costs
+> more in the end."
 
 ## 3. Live: before (3 min) · app, left panel
 
@@ -54,30 +56,32 @@ credits), open `metrics.sql` in a worksheet and run query 2.
 > "Two new MCP features do this. **Response filtering** (`content_cel_filter`) returns only the table, and
 > **MCP Apps** sends the chart to your app separately."
 
-Across 18 runs per pattern:
+Across 18 runs per pattern (6 questions x 3):
 
-| | Before: stored procedure | Before: MCP full response | **Now: MCP filtered + MCP Apps** |
+| | Before: stored procedure | Before: MCP full response | **After: MCP filtered + MCP Apps** |
 |---|---|---|---|
-| **Accuracy:** correct answers | 67% | 100% | **100%** |
-| **Cost:** credits per question | 0.246 | 0.233 | **0.139** |
-| **Cost:** credits per 1,000 questions | 246 | 233 | **139** |
-| **Cost:** orchestrator tokens | 93K | 40K | **1.1K** |
-| **Latency:** median / average | 35 s / 50 s | 28 s / 31 s | **21 s / 28 s** |
-| **Latency:** two-domain questions | 72 s | 44 s | **41 s** |
-| Chart in your app | after re-asking | — | **every answer** |
+| **Accuracy**: correct answers | 78% | 100% | **100%** |
+| **Cost**: credits per question | 0.259 | 0.128 | **0.068** |
+| **Cost**: credits per 1,000 questions | 259 | 128 | **68** |
+| **Latency**: median | 69 s | 16 s | **16 s** |
+| Specialist calls per question | 2.3 (re-asking) | 1.3 | **1.3** |
+| Context sent back to the orchestrator | text only | ~54 KB | **~1.9 KB** |
+| Orchestrator tokens | 127K | 23K | **1.3K** |
+| Chart in the app | 83%, redrawn by the orchestrator after re-asking | no | **94%, the specialist's own chart** |
 
-> "Same accuracy, about 40% lower cost per question, and faster. The orchestrator's own tokens drop 97%.
+> "Compared with the MCP setup you had: the same accurate answers, 47% lower cost per question, and charts in
+> your app. Compared with the stored procedures: 74% lower cost and 77% faster, because there's no re-asking.
 > What's left is the specialists doing their actual work."
 
 ## 6. How to adopt it (2 min) · slide 9
 
 1. Keep your specialist agents (make sure each has `data_to_chart`).
 2. Put them behind one managed MCP server.
-3. Set `content_cel_filter` to the result table; don't use `full`.
+3. Set `content_cel_filter` to keep tables and text; don't use `full`.
 4. Draw charts from `_mcp_app` in your React app.
 5. Retire the stored-procedure wrappers.
 
-> "Everything you saw is in the repo: `setup.sql` builds it in your account, and `measure.py` reproduces
+> "Everything you saw is in the repo: `deploy.sh` builds it in your account, and `measure.py` reproduces
 > the numbers."
 
 ---
@@ -99,5 +103,5 @@ Across 18 runs per pattern:
   orchestrator small (appendix slide).
 - **"Is MCP Apps generally available?"** It's in preview. The table filtering works today without it, and
   your app can chart the returned table itself.
-- **"Will our numbers match?"** Not exactly. This uses synthetic data with ~15K-token semantic views.
+- **"Will our numbers match?"** Not exactly. This uses synthetic data with small (~1.5K-token) semantic views. Larger semantic views make the "before" penalty bigger, because more context comes back on every call.
   `measure.py` runs the same test on your agents.

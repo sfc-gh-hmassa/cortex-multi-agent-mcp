@@ -37,21 +37,30 @@ flowchart LR
     style App fill:#11567F,stroke:#11567F,color:#fff
 ```
 
-1. **The orchestrator paid to read every specialist's semantic model.** Each call returned the specialist's
-   whole working context, about 100 KB, into the orchestrator's context window.
-2. **The app got no chart.** What reached the app was text, so there was nothing to render. Wrapping
-   specialists in stored procedures (`DATA_AGENT_RUN`) had the same problem: text only, and rounded numbers.
+Teams usually built this one of two ways, and each had a different problem:
+
+| | MCP server, full response | Stored procedure + `DATA_AGENT_RUN` |
+|---|---|---|
+| How the orchestrator calls a specialist | Through the managed MCP server | A custom tool runs a stored procedure that calls the specialist and returns its text |
+| Context sent back to the orchestrator | **Too much**: the specialist's semantic-view context, chart instructions and SQL (~50–100 KB per call) | **Little**: just the written answer |
+| Tables and charts in the app | No | **Lost**: the procedure keeps only the text, so the orchestrator re-queries to redraw them |
+| What drives the cost | Reading the bloated responses on every call | **Re-asking**: with only prose to go on, the orchestrator often calls specialists again (for "the exact numbers", or the next specialist with incomplete context), and each extra call is a full agent run |
+
+So the stored-procedure approach does cut the semantic-view bloat. It gives up the tables and charts, though,
+and without structured results the orchestrator lacks the context to route follow-ups well, so it makes more
+specialist calls. In this example it averaged about 2.4 specialist calls per question, versus about 1.3 for
+the MCP patterns.
 
 ## After: what changed
 
 ```mermaid
 flowchart LR
     App["Your app (React)"] -->|question| O[Orchestrator]
-    O -->|"ask, content_cel_filter = table"| MCP["Snowflake MCP server"]
+    O -->|"ask, content_cel_filter = tables + text"| MCP["Snowflake MCP server"]
     MCP --> P[Procurement agent]
     MCP --> Q[Supplier Quality agent]
-    P -->|"~1 KB result table"| O
-    Q -->|"~1 KB result table"| O
+    P -->|"~1-2 KB: result table + short answer"| O
+    Q -->|"~1-2 KB: result table + short answer"| O
     O -->|answer| App
     P -.->|"chart + table (MCP Apps)"| App
     Q -.->|"chart + table (MCP Apps)"| App
@@ -64,7 +73,7 @@ flowchart LR
 
 | New MCP capability | What it does | Effect |
 |---|---|---|
-| **Response filtering** (`content_cel_filter`) | Specialists return only the result table (or `compact`, now the default) | The orchestrator reads ~1 KB instead of ~100 KB per call |
+| **Response filtering** (`content_cel_filter`) | Specialists return only their result tables and short answer (or `compact`, now the default) | The orchestrator reads ~1–2 KB instead of ~50–100 KB per call |
 | **MCP Apps** (preview) | The specialist's finished chart and table go straight to the app | Charts never pass through the orchestrator |
 | **`AGENT_RUN_RESULT`** | Fetch other parts of a finished run later | You pay for detail only when you use it |
 | **Background runs** | Long questions run asynchronously | No client timeouts |
@@ -76,11 +85,22 @@ pattern:
 
 | | Before: stored procedure | Before: MCP full response | **After: MCP filtered + MCP Apps** |
 |---|---|---|---|
-| **Accuracy**: correct answers | 67% | 100% | **100%** |
-| **Cost**: credits per question | 0.246 | 0.233 | **0.139** (about 40% lower) |
-| **Latency**: median | 35 s | 28 s | **21 s** |
-| Orchestrator tokens | 93K | 40K | **1.1K** |
-| Chart in the app | after re-asking | no | **every answer** |
+| **Accuracy**: correct answers | 78% | 100% | **100%** |
+| **Cost**: credits per question | 0.259 | 0.128 | **0.068** |
+| **Cost**: credits per 1,000 questions | 259 | 128 | **68** |
+| **Latency**: median | 69 s | 16 s | **16 s** |
+| Specialist calls per question | 2.3 (re-asking) | 1.3 | **1.3** |
+| Context sent back to the orchestrator | text only | ~54 KB | **~1.9 KB** |
+| Orchestrator tokens | 127K | 23K | **1.3K** |
+| Chart in the app | 83%, redrawn by the orchestrator after re-asking | no | **94%, the specialist's own chart** |
+
+- **vs MCP full response** (same orchestrator, same specialists; only the filter changes): **47% lower
+  cost**, the same accuracy and speed, 94% fewer orchestrator tokens, and charts in the app.
+- **vs stored procedures:** **74% lower cost**, 77% faster, and accuracy up from 78% to
+  100%. The stored-procedure orchestrator is a full Cortex Agent, while the MCP orchestrator is a small
+  router, so part of this gap is the orchestrator itself. The rest is re-asking.
+- Answers that are a single number come back as text, with no chart to draw, which is why charts appear on
+  94% rather than 100% of answers.
 
 Credits come from `SNOWFLAKE.ACCOUNT_USAGE.CORTEX_AGENT_USAGE_HISTORY`, where cached tokens bill at a lower
 rate. The orchestrator's own tokens are the full-price kind, which is why cost falls more than token count
@@ -109,7 +129,7 @@ Snowflake user.
 
 ```mermaid
 flowchart LR
-    S["setup.sql<br/>data, 4 semantic views,<br/>4 specialist agents,<br/>MCP server"] --> I["Infrastructure<br/>compute pool, stage,<br/>image repository"]
+    S["sql/01-07<br/>data, semantic views,<br/>specialist agents,<br/>MCP server"] --> I["Infrastructure<br/>compute pool, stage,<br/>image repository"]
     I --> A["App service<br/>(Snowpark Container<br/>Services)"]
     A --> U["App URL<br/>sign in with Snowflake"]
 ```
@@ -117,8 +137,21 @@ flowchart LR
 Everything is created in `MULTIAGENT_DEMO.DEMO`. Running `deploy.sh` again updates it in place, with the
 same URL.
 
-**Prefer your laptop?** Run `./run_local.sh` (same env vars plus `DEMO_WAREHOUSE`) after `setup.sql`, then
-open http://localhost:8000.
+**Prefer your laptop?** Run `./run_local.sh` (same env vars plus `DEMO_WAREHOUSE`) after the objects exist,
+then open http://localhost:8000.
+
+**Prefer worksheets?** Run the files in [`sql/`](sql) in order in Snowsight, replacing `COMPUTE_WH` with your
+warehouse. Each file starts with a short explanation of what it creates and why:
+
+| File | Creates |
+|---|---|
+| `01_sample_data.sql` | Shared dimensions (plants, suppliers, parts) and one fact table per domain |
+| `02_semantic_views.sql` | One semantic view per domain, with synonyms, business rules and verified queries |
+| `03_specialist_agents.sql` | The four specialist agents (Analyst + `data_to_chart`) |
+| `04_before_stored_procedures.sql` | The "before" pattern: `DATA_AGENT_RUN` stored-procedure wrappers and their orchestrator |
+| `05_mcp_server.sql` | The managed MCP server used by both "before" (full response) and "after" (table only) |
+| `06_demo_runs.sql` | The run log behind the app's scoreboard and `metrics.sql` |
+| `07_appendix_toolset.sql` | Optional: the `agent_toolset` orchestrator |
 
 ## Show it
 
@@ -156,22 +189,85 @@ above was produced.
 1. Keep your specialist agents. Make sure each has `data_to_chart`.
 2. Expose them through one managed MCP server, one `CORTEX_AGENT_RUN` tool per specialist.
 3. In the orchestrator, call each specialist with
-   `"content_cel_filter": "content.filter(c, c.type == 'table')"`. Don't use `full`.
+   `"content_cel_filter": "content.filter(c, c.type == 'table' || c.type == 'text')"`. Don't use `full`.
+   Keep the text blocks: a single-number answer often comes back as text with no table.
 4. In the app, draw charts from each result's `structuredContent._mcp_app.blocks` (a Vega-Lite spec and the
    table rows).
 5. Retire the stored-procedure wrappers.
 
-See `app/server.py` for a working orchestrator (about 100 lines) and `app/index.html` for the React side.
+## Use it as a framework
+
+The example uses four manufacturing specialists, but nothing in the code is specific to them. Each piece has
+one job:
+
+| Piece | Where | What you'd change for your own use |
+|---|---|---|
+| Specialist agents | `sql/03_specialist_agents.sql` | Your own agents, each with its semantic view, Analyst tool and `data_to_chart` |
+| Which specialists exist | `sql/05_mcp_server.sql` | One `CORTEX_AGENT_RUN` tool per specialist. **The description is what the orchestrator routes on.** |
+| Orchestrator | `app/server.py` → `run()` | Usually nothing. It reads the specialists from the MCP server at run time |
+| What comes back | `FILTERS` in `app/server.py` | The CEL expression that decides what the orchestrator sees |
+| Front end | `app/index.html` | Your own React app: render `_mcp_app` blocks with Vega-Lite |
+
+### Add your own specialist
+
+No Python changes:
+
+1. Create a semantic view and an agent for the new domain. Copy one of the agents in
+   `sql/03_specialist_agents.sql` and point it at your semantic view.
+2. Add a tool for it to the MCP server in `sql/05_mcp_server.sql`, with a description of what it answers:
+
+   ```yaml
+     - name: "warranty_agent"
+       type: "CORTEX_AGENT_RUN"
+       identifier: "MY_DB.MY_SCHEMA.WARRANTY_AGENT"
+       title: "Warranty"
+       description: "Warranty claims, claim cost and failure rates by part, customer and date."
+   ```
+3. Re-run that file (or `./deploy.sh`). Within 5 minutes the orchestrator picks the new specialist up from
+   the MCP server's tool list and starts routing questions to it.
+
+## How it works
+
+The orchestrator is `app/server.py`. One function, `run(mode, question)`, does the whole flow, and the only
+difference between "before" and "after" is one argument on the MCP call:
+
+```python
+FILTERS = {"before": "full", "after": "content.filter(c, c.type == 'table' || c.type == 'text')"}
+...
+res = mcp_call(call["agent"], {"text": call["question"], "content_cel_filter": FILTERS[mode]})
+```
+
+Step by step:
+
+1. **Route.** The orchestrator reads the specialists from the MCP server (`specialists()`, the server's
+   `tools/list`). One LLM call (`ROUTER` prompt) then picks the ones the question needs and drafts a question
+   for each.
+2. **Ask the specialists in order.** For two-domain questions, the second question is rewritten using the
+   first specialist's results (`FOLLOW_UP` prompt): "for these 5 supplier IDs, what is the defect rate?"
+3. **Collect what came back.** The orchestrator keeps the specialist's text or table for its answer. In
+   "after" mode it also takes the chart and table blocks from `structuredContent._mcp_app` and passes them to
+   the browser untouched. That's MCP Apps.
+4. **Answer.** One more LLM call writes the 2–4 sentence answer.
+5. **Measure and log.** Tokens and credits come from each specialist run's `metadata.usage`, priced with the
+   billed per-token rates (`RATES`). The run is written to `DEMO_RUNS` for the scoreboard.
+
+Authentication is in `headers()`. Inside Snowflake the app uses the service's own OAuth token (read from
+`/snowflake/session/token`), so there are no credentials in the container; on a laptop it uses your PAT.
+
+The browser side is `app/index.html`: a single-page React app (no build step) with two panels and a scoreboard.
+React, Vega-Lite and the markdown renderer are bundled in `app/vendor/`, because Snowflake's app gateway only
+allows scripts served by the app itself.
 
 ## What's in the repo
 
 ```
 deploy.sh            one-command setup in Snowflake (prints the app URL)
 run_local.sh         run the app on your laptop instead
-setup.sql            data, semantic views, specialist agents, MCP server, DEMO_RUNS table
+sql/01-07            data, semantic views, specialist agents, both patterns, MCP server, run log
 metrics.sql          before/after cost and latency, including billed credits
 app/server.py        the orchestrator (before and after modes) and run logging
 app/index.html       the React app: side-by-side panels and the running comparison
+app/vendor/          React, Vega-Lite, marked and DOMPurify, served by the app
 app/spcs_*.sql       Snowpark Container Services objects (used by deploy.sh)
 measure.py           optional benchmark across all patterns
 questions.json       benchmark questions and their true answers
@@ -183,7 +279,7 @@ DEMO_SCRIPT.md       15-minute customer walkthrough
 ## Appendix: agent toolsets
 
 If Snowflake Intelligence is the front end, the orchestrator can also borrow the specialists' tools with
-`agent_toolset`. It has native charts and cost 0.129 credits / 20 s per question in this test. It works well with
+`agent_toolset`. It has native charts and cost 0.070 credits / 14 s per question in this test. It works well with
 a handful of specialists. With many, every borrowed tool is listed on each step and cost grows. For your own
 app, use the MCP approach above.
 

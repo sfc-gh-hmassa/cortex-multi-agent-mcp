@@ -21,9 +21,12 @@ SQL() {
     ${SNOWFLAKE_ROLE:+--role "$SNOWFLAKE_ROLE"} "$@"
 }
 
-echo "==> 1/5  Creating the specialist agents, MCP server and data (setup.sql)"
-sed "s/COMPUTE_WH/$WH/g" "$HERE/setup.sql" > /tmp/multiagent_setup.sql
-SQL -f /tmp/multiagent_setup.sql > /dev/null
+echo "==> 1/5  Creating the data, semantic views, specialist agents and MCP server (sql/01-07)"
+for f in "$HERE"/sql/0*.sql; do
+  echo "      $(basename "$f")"
+  sed "s/COMPUTE_WH/$WH/g" "$f" > /tmp/multiagent_step.sql
+  SQL -f /tmp/multiagent_step.sql > /dev/null
+done
 
 echo "==> 2/5  Creating the image repository, code stage, compute pool and PyPI access"
 sed "s/COMPUTE_WH/$WH/g" "$HERE/app/spcs_infra.sql" > /tmp/multiagent_infra.sql

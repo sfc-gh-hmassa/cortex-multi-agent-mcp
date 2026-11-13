@@ -5,13 +5,13 @@ orchestrator, calling the specialist agents through the managed MCP server.
 
   before: specialists return their full response (old behavior). The orchestrator reads all of it and
           sends the app a text answer only.
-  after:  specialists return only the result table. The orchestrator reads that, and the app gets the
+  after:  specialists return only their result tables and short text answer. The orchestrator reads that, and the app gets the
           specialists' charts and tables from MCP Apps (structuredContent._mcp_app).
 
 Run locally:  export SNOWFLAKE_ACCOUNT=<org>-<account> SNOWFLAKE_PAT=<token>
               uvicorn server:app --port 8000      then open http://localhost:8000
-In Snowflake: deployed as a Snowpark Container Services service (see spcs/), which uses the service's own
-              OAuth token, so no PAT is needed.
+In Snowflake: deployed as a Snowpark Container Services service (see deploy.sh), which uses the service's
+              own OAuth token, so no PAT is needed.
 """
 import json
 import os
@@ -47,17 +47,14 @@ def headers():
 
 
 MCP_URL = f"{HOST}/api/v2/databases/{DB}/schemas/{SC}/mcp-servers/SPECIALIST_AGENTS_MCP"
-FILTERS = {"before": "full", "after": "content.filter(c, c.type == 'table')"}
-SPECIALISTS = {
-    "procurement_agent": "purchase orders, spend, units and prices by supplier, part, plant, date",
-    "supplier_quality_agent": "inspections, defects, defect rate (PPM), NCRs by supplier, part, plant, date",
-    "inventory_agent": "on-hand stock, safety stock, parts below safety stock, days of supply by part and plant",
-    "orders_agent": "customer orders, open backlog value, on-time delivery by customer, part, plant, date",
-}
-ROUTER = ("You are an orchestrator. Specialist agents:\n"
-          + "".join(f"- {k}: {v}\n" for k, v in SPECIALISTS.items())
-          + 'Call only the specialists the question needs. Return ONLY JSON: '
-            '{"calls":[{"agent":"<name>","question":"<question for that agent>"}]}\nQuestion: ')
+# "after" keeps the specialist's result tables and its short written answer; single-value answers often come
+# back as text with no table, so filtering to tables alone would drop them.
+FILTERS = {"before": "full", "after": "content.filter(c, c.type == 'table' || c.type == 'text')"}
+# Snowflake adds these helper tools to every MCP server that has agent tools; they aren't specialists.
+HELPER_TOOLS = {"ASYNC_AGENT_RUN_STATUS", "AGENT_RUN_RESULT", "ASYNC_AGENT_RUN_CANCEL"}
+ROUTER = ("You are an orchestrator. Specialist agents:\n{specialists}"
+          'Call only the specialists the question needs. Return ONLY JSON: '
+          '{{"calls":[{{"agent":"<name>","question":"<question for that agent>"}}]}}\nQuestion: {q}')
 ANSWER = ("You are an orchestrator answering for a business app. Using the specialist results below, answer "
           "the question in 2-4 sentences with exact values.{charts}\nQuestion: {q}\nResults:\n{r}")
 
@@ -90,6 +87,25 @@ def mcp_call(tool, args):
     return j["result"]
 
 
+_specialists = {"loaded_at": 0.0, "tools": {}}
+
+
+def specialists():
+    """The specialist agents on the MCP server, as {tool name: description}.
+
+    Read from the server's tools/list, so adding a specialist is a Snowflake change only: create the agent
+    and add it to the MCP server (sql/05_mcp_server.sql). Cached for 5 minutes.
+    """
+    if time.time() - _specialists["loaded_at"] > 300:
+        body = {"jsonrpc": "2.0", "id": 1, "method": "tools/list"}
+        r = http.post(MCP_URL, headers=headers(), json=body, timeout=60)
+        r.raise_for_status()
+        tools = r.json()["result"]["tools"]
+        _specialists["tools"] = {t["name"]: t.get("description", "") for t in tools if t["name"] not in HELPER_TOOLS}
+        _specialists["loaded_at"] = time.time()
+    return _specialists["tools"]
+
+
 def specialist_usage(text):
     """Tokens, credits and thread id for one specialist run, from its response metadata."""
     try:
@@ -108,11 +124,21 @@ def specialist_usage(text):
     return tokens, uncached, credits, meta.get("thread_id")
 
 
-def sql(statement, *binds):
-    """Run one statement through the Snowflake SQL API with bound parameters."""
+def bind(value):
+    """Describe one ? parameter for the SQL API."""
+    if isinstance(value, float):
+        kind = "REAL"
+    elif isinstance(value, int):
+        kind = "FIXED"
+    else:
+        kind = "TEXT"
+    return {"type": kind, "value": str(value)}
+
+
+def sql(statement, *params):
+    """Run one statement through the Snowflake SQL API, with ? placeholders bound to params."""
     body = {"statement": statement, "warehouse": WAREHOUSE, "database": DB, "schema": SC, "timeout": 120,
-            "bindings": {str(i + 1): {"type": "REAL" if isinstance(v, float) else "FIXED" if isinstance(v, int)
-                                      else "TEXT", "value": str(v)} for i, v in enumerate(binds)}}
+            "bindings": {str(i + 1): bind(v) for i, v in enumerate(params)}}
     r = http.post(f"{HOST}/api/v2/statements", headers=headers(), json=body, timeout=180)
     r.raise_for_status()
     return r.json().get("data", [])
@@ -130,7 +156,8 @@ def log_run(result, question):
 
 def run(mode, question):
     start = time.time()
-    plan, orch_tok = complete(ROUTER + question)
+    listing = "".join(f"- {name}: {desc}\n" for name, desc in specialists().items())
+    plan, orch_tok = complete(ROUTER.format(specialists=listing, q=question))
     calls = json.loads(re.search(r"\{.*\}", plan, re.S).group(0))["calls"]
 
     # Call specialists in order. When a question spans domains, the orchestrator rewrites each follow-up
