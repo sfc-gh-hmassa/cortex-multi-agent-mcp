@@ -15,7 +15,8 @@ question.
 app.** [Results](#4-results)
 
 **Two ways to try it:**
-- **Quickest: compare one call.** Run the files in `sql/` in a Snowsight worksheet, then run
+- **Quickest: compare one call.** Run the files in `sql/` in order in a Snowsight worksheet (replace
+  `COMPUTE_WH` with your warehouse), then `pip install requests` and run
   [`compare_call.py`](#try-it-on-one-call-2-minutes). It makes one specialist call both ways and prints the
   context size, tokens, credits and latency.
 - **Run the full before/after app:** [`./deploy.sh`](#7-set-it-up-one-command) builds everything, including

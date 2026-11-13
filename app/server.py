@@ -5,11 +5,12 @@ orchestrator, calling the specialist agents through the managed MCP server.
 
   before: specialists return their full response (old behavior). The orchestrator reads all of it and
           sends the app a text answer only.
-  after:  specialists return only their result tables and short text answer. The orchestrator reads that, and the app gets the
-          specialists' charts and tables from MCP Apps (structuredContent._mcp_app).
+  after:  specialists return only their result tables and short text answer. The orchestrator reads that,
+          and the app gets the specialists' charts and tables from MCP Apps (structuredContent._mcp_app).
 
-Run locally:  export SNOWFLAKE_ACCOUNT=<org>-<account> SNOWFLAKE_PAT=<token>
-              uvicorn server:app --port 8000      then open http://localhost:8000
+Run locally:  pip install fastapi uvicorn requests
+              export SNOWFLAKE_ACCOUNT=<org>-<account> SNOWFLAKE_PAT=<token> DEMO_WAREHOUSE=<warehouse>
+              uvicorn server:app --app-dir app --port 8000      then open http://localhost:8000
 In Snowflake: deployed as a Snowpark Container Services service (see deploy.sh), which uses the service's
               own OAuth token, so no PAT is needed.
 """
