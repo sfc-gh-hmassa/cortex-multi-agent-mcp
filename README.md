@@ -9,9 +9,17 @@ domain) through the managed MCP server. The app runs the old way and the new way
 question.
 
 ![Before vs after app](docs/app_before_after.png)
+<sub>One question in the app. The figures in [Results](#4-results) average 18 runs per pattern.</sub>
 
 **In this test, the new way cost 47–74% less, kept 100% accuracy and put the specialists' charts back in the
-app.** [Results](#results)
+app.** [Results](#4-results)
+
+**Two ways to try it:**
+- **Quickest: compare one call.** Run the files in `sql/` in a Snowsight worksheet, then run
+  [`compare_call.py`](#try-it-on-one-call-2-minutes). It makes one specialist call both ways and prints the
+  context size, tokens, credits and latency.
+- **Run the full before/after app:** [`./deploy.sh`](#7-set-it-up-one-command) builds everything, including
+  the React app on Snowpark Container Services. This is optional.
 
 | If you want to… | Go to |
 |---|---|
