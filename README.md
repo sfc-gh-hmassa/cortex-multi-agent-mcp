@@ -149,8 +149,15 @@ In this repo that's one line in `app/server.py`:
 FILTERS = {"before": "full", "after": "content.filter(c, c.type == 'table' || c.type == 'text')"}
 ```
 
-Keep the **text** blocks as well as the tables: a single-number answer ("Guadalajara has 108") often comes back
-as text with no table. A table-only filter dropped those answers in our testing.
+**Why tables + text, and not charts:**
+
+| Filter | Result in our testing |
+|---|---|
+| Tables only | Single-number answers ("Guadalajara has 108") come back as text with no table, so they were dropped. The two-specialist question that needed them fell to 0% correct |
+| **Tables + text** | Everything the orchestrator needs to route and answer, in ~1–2 KB. 100% correct |
+| Also include charts | Puts the Vega-Lite spec back into the orchestrator's context, which it never reads. Not needed: MCP Apps delivers charts in `structuredContent._mcp_app` whatever the filter |
+
+The filter decides what the **orchestrator** reads. MCP Apps decides what the **app** draws. Keep them separate.
 
 ### d. The app: draw the charts from `_mcp_app`
 
